@@ -593,7 +593,6 @@ static const TransitionStateFunc sShredSplit_Funcs[] =
 {
     ShredSplit_Init,
     ShredSplit_Main,
-    ShredSplit_BrokenCheck,
     ShredSplit_End
 };
 
@@ -2988,24 +2987,6 @@ static bool8 ShredSplit_Main(struct Task *task)
 // It's possible this transition is only partially
 // done and the second part was left out.
 // In any case removing or bypassing this state allows the transition to finish.
-static bool8 ShredSplit_BrokenCheck(struct Task *task)
-{
-    u16 i;
-    bool32 done = TRUE;
-    u16 checkVar2 = 0xFF10;
-
-    for (i = 0; i < DISPLAY_HEIGHT; i++)
-    {
-        if (gScanlineEffectRegBuffers[1][i] != DISPLAY_WIDTH && gScanlineEffectRegBuffers[1][i] != checkVar2)
-            done = FALSE;
-    }
-
-    if (done == TRUE)
-        task->tState++;
-
-    return FALSE;
-}
-
 static bool8 ShredSplit_End(struct Task *task)
 {
     DmaStop(0);

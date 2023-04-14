@@ -52,6 +52,7 @@
 #include "util.h"
 #include "wild_encounter.h"
 #include "window.h"
+#include "dns.h"
 #include "constants/abilities.h"
 #include "constants/battle_move_effects.h"
 #include "constants/battle_string_ids.h"
@@ -873,6 +874,7 @@ static void CB2_HandleStartBattle(void)
     u8 enemyMultiplayerId;
 
     RunTasks();
+    DnsApplyFilters();
     AnimateSprites();
     BuildOamBuffer();
 

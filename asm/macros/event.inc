@@ -1946,6 +1946,15 @@
 	special CreateEnemyEventMon
 	.endm
 
+	@ Opens the bag in the specified pocket and lets the Player choose an item.
+	@ This item can be used for scripting purposes and it's stored in VAR_ITEM_ID.
+	.macro chooseitem pocket:req
+	setvar VAR_TEMP_1, \pocket
+	fadescreen FADE_TO_BLACK
+	special ChooseItemFromBag
+	waitstate
+	.endm
+
 	@ Set up a totem boost for the next battle.
 	@ 'battler' is the position of the mon you want to gain a boost. see B_POSITION_xx in include/constants/battle.h.
 	@ The rest of the arguments are the stat change values to each stat.
